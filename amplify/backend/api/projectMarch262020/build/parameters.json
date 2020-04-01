@@ -1,0 +1,14 @@
+{
+    "CreateAPIKey": 0,
+    "AppSyncApiName": "projectMarch262020",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authcognito704b3e59",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "S3DeploymentBucket": "amplify-my-aws-project-fun-165729-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/a15c19968855d92cc1a9a89f46ef13447efbbf72"
+}
