@@ -49,8 +49,8 @@ export const DashboardLayout = ({ children }) => {
           Hello <span>{username}</span>! This is your Dashboard
         </p>
         <NavLinksContainer>
-          <StyledLink to="/app">Dashboard</StyledLink>
-          <StyledLink to="/app/home">Home</StyledLink>
+          <StyledLink to="/app">Home</StyledLink>
+          <StyledLink to="/app/profile">Profile</StyledLink>
         </NavLinksContainer>
       </Header>
       <StyledSection>{children}</StyledSection>

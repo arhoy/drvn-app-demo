@@ -20,7 +20,7 @@ export const Section0 = () => {
   return (
     <div>
       <Section>
-        <H1>Welcome to AWS GATSBY!</H1>
+        <H1>DEMO 4 DRVN</H1>
         <LinkContainer>
           <Link to="/app"> View Your Dashboard</Link>
         </LinkContainer>

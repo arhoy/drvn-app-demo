@@ -1,0 +1,23 @@
+type Team @model @searchable {
+  id: ID!
+  name: String!
+  users: [User] @connection(name: "TeamUsers", sortField: "createdAt")
+  tags: [String]
+  owner: String!
+  updatedAt: AWSDateTime
+  createdAt: AWSDateTime
+}
+
+type User
+  @model
+  @searchable
+  @auth(rules: [{ allow: groups, groups: ["admin"] }]) {
+  id: ID!
+  username: String!
+  email: String!
+  registered: Boolean
+  role: String!
+  team: Team @connection(name: "TeamUsers", sortField: "createdAt")
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}

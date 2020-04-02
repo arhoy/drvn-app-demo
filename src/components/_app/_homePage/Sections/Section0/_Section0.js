@@ -1,10 +1,10 @@
 import React from 'react';
-import { NewMarket } from './NewMarket';
+import { NewTeam } from './NewTeam';
 
 export const Section0 = () => {
   return (
     <div>
-      <NewMarket />
+      <NewTeam />
     </div>
   );
 };

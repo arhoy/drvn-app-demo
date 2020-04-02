@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "drvn",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authdrvnappdemo9d622fd1",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

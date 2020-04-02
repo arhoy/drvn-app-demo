@@ -1,101 +1,46 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getMarket = /* GraphQL */ `
-  query GetMarket($id: ID!) {
-    getMarket(id: $id) {
+export const getTeam = /* GraphQL */ `
+  query GetTeam($id: ID!) {
+    getTeam(id: $id) {
       id
       name
-      products {
+      users {
         items {
           id
-          description
-          price
-          shipped
-          owner
+          username
+          email
+          registered
+          role
           createdAt
+          updatedAt
         }
         nextToken
       }
       tags
       owner
+      updatedAt
       createdAt
     }
   }
 `;
-export const listMarkets = /* GraphQL */ `
-  query ListMarkets(
-    $filter: ModelMarketFilterInput
+export const listTeams = /* GraphQL */ `
+  query ListTeams(
+    $filter: ModelTeamFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listMarkets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         name
-        products {
+        users {
           nextToken
         }
         tags
         owner
-        createdAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getProduct = /* GraphQL */ `
-  query GetProduct($id: ID!) {
-    getProduct(id: $id) {
-      id
-      description
-      market {
-        id
-        name
-        products {
-          nextToken
-        }
-        tags
-        owner
-        createdAt
-      }
-      file {
-        bucket
-        region
-        key
-      }
-      price
-      shipped
-      owner
-      createdAt
-    }
-  }
-`;
-export const listProducts = /* GraphQL */ `
-  query ListProducts(
-    $filter: ModelProductFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        description
-        market {
-          id
-          name
-          tags
-          owner
-          createdAt
-        }
-        file {
-          bucket
-          region
-          key
-        }
-        price
-        shipped
-        owner
+        updatedAt
         createdAt
       }
       nextToken
@@ -109,24 +54,59 @@ export const getUser = /* GraphQL */ `
       username
       email
       registered
-      orders {
-        items {
-          id
-          createdAt
+      role
+      team {
+        id
+        name
+        users {
+          nextToken
         }
-        nextToken
+        tags
+        owner
+        updatedAt
+        createdAt
       }
+      createdAt
+      updatedAt
     }
   }
 `;
-export const searchMarkets = /* GraphQL */ `
-  query SearchMarkets(
-    $filter: SearchableMarketFilterInput
-    $sort: SearchableMarketSortInput
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    searchMarkets(
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        email
+        registered
+        role
+        team {
+          id
+          name
+          tags
+          owner
+          updatedAt
+          createdAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const searchTeams = /* GraphQL */ `
+  query SearchTeams(
+    $filter: SearchableTeamFilterInput
+    $sort: SearchableTeamSortInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    searchTeams(
       filter: $filter
       sort: $sort
       limit: $limit
@@ -135,12 +115,48 @@ export const searchMarkets = /* GraphQL */ `
       items {
         id
         name
-        products {
+        users {
           nextToken
         }
         tags
         owner
+        updatedAt
         createdAt
+      }
+      nextToken
+      total
+    }
+  }
+`;
+export const searchUsers = /* GraphQL */ `
+  query SearchUsers(
+    $filter: SearchableUserFilterInput
+    $sort: SearchableUserSortInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    searchUsers(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        username
+        email
+        registered
+        role
+        team {
+          id
+          name
+          tags
+          owner
+          updatedAt
+          createdAt
+        }
+        createdAt
+        updatedAt
       }
       nextToken
       total

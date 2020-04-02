@@ -1,150 +1,147 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateMarket = /* GraphQL */ `
-  subscription OnCreateMarket {
-    onCreateMarket {
+export const onCreateTeam = /* GraphQL */ `
+  subscription OnCreateTeam {
+    onCreateTeam {
       id
       name
-      products {
+      users {
         items {
           id
-          description
-          price
-          shipped
-          owner
+          username
+          email
+          registered
+          role
           createdAt
+          updatedAt
         }
         nextToken
       }
       tags
       owner
+      updatedAt
       createdAt
     }
   }
 `;
-export const onUpdateMarket = /* GraphQL */ `
-  subscription OnUpdateMarket {
-    onUpdateMarket {
+export const onUpdateTeam = /* GraphQL */ `
+  subscription OnUpdateTeam {
+    onUpdateTeam {
       id
       name
-      products {
+      users {
         items {
           id
-          description
-          price
-          shipped
-          owner
+          username
+          email
+          registered
+          role
           createdAt
+          updatedAt
         }
         nextToken
       }
       tags
       owner
+      updatedAt
       createdAt
     }
   }
 `;
-export const onDeleteMarket = /* GraphQL */ `
-  subscription OnDeleteMarket {
-    onDeleteMarket {
+export const onDeleteTeam = /* GraphQL */ `
+  subscription OnDeleteTeam {
+    onDeleteTeam {
       id
       name
-      products {
+      users {
         items {
           id
-          description
-          price
-          shipped
-          owner
+          username
+          email
+          registered
+          role
           createdAt
+          updatedAt
         }
         nextToken
       }
       tags
       owner
+      updatedAt
       createdAt
     }
   }
 `;
-export const onCreateProduct = /* GraphQL */ `
-  subscription OnCreateProduct($owner: String!) {
-    onCreateProduct(owner: $owner) {
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
       id
-      description
-      market {
+      username
+      email
+      registered
+      role
+      team {
         id
         name
-        products {
+        users {
           nextToken
         }
         tags
         owner
+        updatedAt
         createdAt
       }
-      file {
-        bucket
-        region
-        key
-      }
-      price
-      shipped
-      owner
       createdAt
+      updatedAt
     }
   }
 `;
-export const onUpdateProduct = /* GraphQL */ `
-  subscription OnUpdateProduct($owner: String!) {
-    onUpdateProduct(owner: $owner) {
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
       id
-      description
-      market {
+      username
+      email
+      registered
+      role
+      team {
         id
         name
-        products {
+        users {
           nextToken
         }
         tags
         owner
+        updatedAt
         createdAt
       }
-      file {
-        bucket
-        region
-        key
-      }
-      price
-      shipped
-      owner
       createdAt
+      updatedAt
     }
   }
 `;
-export const onDeleteProduct = /* GraphQL */ `
-  subscription OnDeleteProduct($owner: String!) {
-    onDeleteProduct(owner: $owner) {
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
       id
-      description
-      market {
+      username
+      email
+      registered
+      role
+      team {
         id
         name
-        products {
+        users {
           nextToken
         }
         tags
         owner
+        updatedAt
         createdAt
       }
-      file {
-        bucket
-        region
-        key
-      }
-      price
-      shipped
-      owner
       createdAt
+      updatedAt
     }
   }
 `;

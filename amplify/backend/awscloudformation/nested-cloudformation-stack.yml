@@ -68,15 +68,15 @@
 				}
 			}
 		},
-		"authcognito704b3e59": {
+		"authdrvnappdemo9d622fd1": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/amplify-my-aws-project-fun-165729-deployment/amplify-cfn-templates/auth/cognito704b3e59-cloudformation-template.yml",
+				"TemplateURL": "https://s3.amazonaws.com/amplify-drvn-app-demo-drvn-24901-deployment/amplify-cfn-templates/auth/drvnappdemo9d622fd1-cloudformation-template.yml",
 				"Parameters": {
-					"identityPoolName": "cognito704b3e59_identitypool_704b3e59",
-					"allowUnauthenticatedIdentities": true,
-					"resourceNameTruncated": "cognite25de4a6",
-					"userPoolName": "cognito704b3e59_userpool_704b3e59",
+					"identityPoolName": "drvnappdemo9d622fd1_identitypool_9d622fd1",
+					"allowUnauthenticatedIdentities": false,
+					"resourceNameTruncated": "drvnap9d622fd1",
+					"userPoolName": "drvnappdemo9d622fd1_userpool_9d622fd1",
 					"autoVerifiedAttributes": "email",
 					"mfaConfiguration": "OFF",
 					"mfaTypes": "SMS Text Message",
@@ -86,18 +86,15 @@
 					"emailVerificationMessage": "Your verification code is {####}",
 					"defaultPasswordPolicy": false,
 					"passwordPolicyMinLength": 8,
-					"passwordPolicyCharacters": "Requires Lowercase,Requires Uppercase,Requires Numbers,Requires Symbols",
+					"passwordPolicyCharacters": "",
 					"requiredAttributes": "email",
 					"userpoolClientGenerateSecret": true,
 					"userpoolClientRefreshTokenValidity": 30,
 					"userpoolClientWriteAttributes": "email",
 					"userpoolClientReadAttributes": "email",
-					"userpoolClientLambdaRole": "cognito704b3e59_userpoolclient_lambda_role",
+					"userpoolClientLambdaRole": "drvnap9d622fd1_userpoolclient_lambda_role",
 					"userpoolClientSetAttributes": false,
-					"thirdPartyAuth": true,
-					"roleExternalId": "cognito704b3e59_role_external_id",
-					"useDefault": "manual",
-					"resourceName": "cognito704b3e59",
+					"resourceName": "drvnappdemo9d622fd1",
 					"authSelections": "identityPoolAndUserPool",
 					"authRoleArn": {
 						"Fn::GetAtt": [
@@ -111,167 +108,42 @@
 							"Arn"
 						]
 					},
-					"authProviders": "",
-					"userPoolGroups": true,
-					"adminQueries": true,
-					"triggers": "{}",
-					"hostedUI": false,
-					"userPoolGroupList": "admin,developer,user",
-					"adminQueryGroup": "admin",
-					"parentStack": {
-						"Ref": "AWS::StackId"
-					},
-					"permissions": "",
+					"useDefault": "default",
+					"userPoolGroupList": "",
 					"dependsOn": "",
-					"env": "fun"
+					"env": "drvn"
 				}
 			}
 		},
-		"authuserPoolGroups": {
+		"apidrvn": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/amplify-my-aws-project-fun-165729-deployment/amplify-cfn-templates/auth/template.json",
-				"Parameters": {
-					"AuthRoleArn": {
-						"Fn::GetAtt": [
-							"AuthRole",
-							"Arn"
-						]
-					},
-					"UnauthRoleArn": {
-						"Fn::GetAtt": [
-							"UnauthRole",
-							"Arn"
-						]
-					},
-					"authcognito704b3e59UserPoolId": {
-						"Fn::GetAtt": [
-							"authcognito704b3e59",
-							"Outputs.UserPoolId"
-						]
-					},
-					"authcognito704b3e59AppClientIDWeb": {
-						"Fn::GetAtt": [
-							"authcognito704b3e59",
-							"Outputs.AppClientIDWeb"
-						]
-					},
-					"authcognito704b3e59AppClientID": {
-						"Fn::GetAtt": [
-							"authcognito704b3e59",
-							"Outputs.AppClientID"
-						]
-					},
-					"authcognito704b3e59IdentityPoolId": {
-						"Fn::GetAtt": [
-							"authcognito704b3e59",
-							"Outputs.IdentityPoolId"
-						]
-					},
-					"env": "fun"
-				}
-			}
-		},
-		"apiprojectMarch262020": {
-			"Type": "AWS::CloudFormation::Stack",
-			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/amplify-my-aws-project-fun-165729-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/amplify-drvn-app-demo-drvn-24901-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"Parameters": {
 					"CreateAPIKey": 0,
-					"AppSyncApiName": "projectMarch262020",
+					"AppSyncApiName": "drvn",
 					"DynamoDBBillingMode": "PAY_PER_REQUEST",
 					"DynamoDBEnableServerSideEncryption": "false",
 					"AuthCognitoUserPoolId": {
 						"Fn::GetAtt": [
-							"authcognito704b3e59",
+							"authdrvnappdemo9d622fd1",
 							"Outputs.UserPoolId"
 						]
 					},
-					"S3DeploymentBucket": "amplify-my-aws-project-fun-165729-deployment",
-					"S3DeploymentRootKey": "amplify-appsync-files/a15c19968855d92cc1a9a89f46ef13447efbbf72",
-					"env": "fun"
+					"S3DeploymentBucket": "amplify-drvn-app-demo-drvn-24901-deployment",
+					"S3DeploymentRootKey": "amplify-appsync-files/aee12dc96b2d1a57c9f1d55e7e154a949a320368",
+					"env": "drvn"
 				}
 			}
 		},
-		"apiAdminQueries": {
+		"hostingamplifyhosting": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/amplify-my-aws-project-fun-165729-deployment/amplify-cfn-templates/api/admin-queries-cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/amplify-drvn-app-demo-drvn-24901-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
 				"Parameters": {
-					"authRoleName": {
-						"Ref": "AuthRoleName"
-					},
-					"unauthRoleName": {
-						"Ref": "UnauthRoleName"
-					},
-					"authcognito704b3e59UserPoolId": {
-						"Fn::GetAtt": [
-							"authcognito704b3e59",
-							"Outputs.UserPoolId"
-						]
-					},
-					"functionAdminQueriesb081e4d1Arn": {
-						"Fn::GetAtt": [
-							"functionAdminQueriesb081e4d1",
-							"Outputs.Arn"
-						]
-					},
-					"functionAdminQueriesb081e4d1Name": {
-						"Fn::GetAtt": [
-							"functionAdminQueriesb081e4d1",
-							"Outputs.Name"
-						]
-					},
-					"env": "fun"
-				}
-			}
-		},
-		"functionAdminQueriesb081e4d1": {
-			"Type": "AWS::CloudFormation::Stack",
-			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/amplify-my-aws-project-fun-165729-deployment/amplify-cfn-templates/function/AdminQueriesb081e4d1-cloudformation-template.json",
-				"Parameters": {
-					"authcognito704b3e59UserPoolId": {
-						"Fn::GetAtt": [
-							"authcognito704b3e59",
-							"Outputs.UserPoolId"
-						]
-					},
-					"env": "fun"
-				}
-			}
-		},
-		"storages31ada236e": {
-			"Type": "AWS::CloudFormation::Stack",
-			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/amplify-my-aws-project-fun-165729-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
-				"Parameters": {
-					"bucketName": "my-aws-project329e79730b1440f3b5d45853e00ee120",
-					"authPolicyName": "s3_amplify_1ada236e",
-					"unauthPolicyName": "s3_amplify_1ada236e",
-					"authRoleName": {
-						"Ref": "AuthRoleName"
-					},
-					"unauthRoleName": {
-						"Ref": "UnauthRoleName"
-					},
-					"selectedGuestPermissions": "s3:GetObject,s3:ListBucket",
-					"selectedAuthenticatedPermissions": "s3:PutObject",
-					"s3PermissionsAuthenticatedPublic": "s3:PutObject",
-					"s3PublicPolicy": "Public_policy_8f452b86",
-					"s3PermissionsAuthenticatedUploads": "s3:PutObject",
-					"s3UploadsPolicy": "Uploads_policy_8f452b86",
-					"s3PermissionsAuthenticatedProtected": "s3:PutObject",
-					"s3ProtectedPolicy": "Protected_policy_cb24a7dd",
-					"s3PermissionsAuthenticatedPrivate": "s3:PutObject",
-					"s3PrivatePolicy": "Private_policy_cb24a7dd",
-					"AuthenticatedAllowList": "DISALLOW",
-					"s3ReadPolicy": "read_policy_8f452b86",
-					"s3PermissionsGuestPublic": "s3:GetObject",
-					"s3PermissionsGuestUploads": "DISALLOW",
-					"GuestAllowList": "ALLOW",
-					"triggerFunction": "NONE",
-					"env": "fun"
+					"appId": "d3cjwor8dama28",
+					"type": "manual",
+					"env": "drvn"
 				}
 			}
 		},
@@ -279,7 +151,7 @@
 			"DependsOn": [
 				"AuthRole",
 				"UnauthRole",
-				"authcognito704b3e59"
+				"authdrvnappdemo9d622fd1"
 			],
 			"Type": "AWS::Lambda::Function",
 			"Properties": {
@@ -362,7 +234,7 @@
 				},
 				"idpId": {
 					"Fn::GetAtt": [
-						"authcognito704b3e59",
+						"authdrvnappdemo9d622fd1",
 						"Outputs.IdentityPoolId"
 					]
 				},

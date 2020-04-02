@@ -24,7 +24,7 @@ export const ModalForForm = ({ children }) => {
   return (
     <Container>
       <Button type="primary" onClick={showModal}>
-        Create New Market
+        Create New Team
       </Button>
       <Modal
         title="Create New Market"
