@@ -6,7 +6,6 @@ import 'moment-timezone';
 
 // styling
 import styled from '@emotion/styled';
-import { Button } from 'antd';
 
 // routing
 import { Link } from '@reach/router';
@@ -25,37 +24,38 @@ import { UpdateModalForm } from './UpdateModalForm';
 // context
 import { TeamsContext } from '../../../../../context/teams-context';
 import { UserContext } from '../../../../../context/user-context';
+import { StyledButton } from './Styled';
 
 const Container = styled.div`
   color: ${props => props.theme.colors.black};
   background: ${props => props.theme.colors.lightgrey};
+  padding: 1rem 1.5rem;
   display: grid;
   font-size: 1.6rem;
   margin: 1.25rem 0;
-  padding: 0.6rem;
   &:hover {
     -webkit-box-shadow: 10px 11px 8px -5px rgba(0, 0, 0, 0.08);
     -moz-box-shadow: 10px 11px 8px -5px rgba(0, 0, 0, 0.08);
     box-shadow: 10px 11px 8px -5px rgba(0, 0, 0, 0.08);
   }
+  @media (min-width: ${props => props.theme.screenSize.mobileL}) {
+    grid-template-columns: 3fr 1fr;
+  }
+`;
+
+const SubContainerContent = styled.div``;
+
+const SubContainerButtons = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  @media (max-width: ${props => props.theme.screenSize.mobileL}) {
+    justify-content: flex-start;
+  }
 `;
 
 const LinkContainer = styled(Link)`
   background: ${props => props.theme.colors.lightgrey};
-`;
-
-const ButtonContainer = styled.div``;
-
-const StyledButton = styled(Button)`
-  width: 10rem;
-  padding: 3px 6px;
-  font-size: 1.5rem;
-  border-radius: 4px;
-
-  &:hover {
-    color: ${props => props.theme.colors.red};
-    border: 1px solid ${props => props.theme.colors.red};
-  }
 `;
 
 const TitleContainer = styled.div`
@@ -66,6 +66,9 @@ const TitleContainer = styled.div`
   & p {
     margin: 0;
     padding: 0;
+    font-size: 1.3rem;
+    opacity: 0.9;
+    color: ${props => props.theme.colors.black};
   }
 `;
 
@@ -111,36 +114,39 @@ export const TeamItem = ({ data }) => {
 
   return (
     <Container>
-      <LinkContainer to={`/app/markets/${data.id}`}>
-        <TitleContainer>
-          <h4>{data.name}</h4>
-          <h5>Created By: {data.owner}</h5>
+      <SubContainerContent>
+        <LinkContainer to={`/app/markets/${data.id}`}>
+          <TitleContainer>
+            <h4>{data.name}</h4>
+            <h5>Created By: {data.owner}</h5>
 
-          <p>
-            Created At:{' '}
-            <Moment
-              format="MMMM Do YYYY | LT"
-              date={new Date(data.createdAt)}
-            />
-          </p>
-          {data.createdAt !== data.updatedAt && (
             <p>
-              Last Updated:{' '}
+              Created At:{' '}
               <Moment
                 format="MMMM Do YYYY | LT"
-                date={new Date(data.updatedAt)}
+                date={new Date(data.createdAt)}
               />
             </p>
-          )}
-        </TitleContainer>
-        <TagContainer>
-          <Tag>{data.tags && data.tags[0]}</Tag>
-        </TagContainer>
-      </LinkContainer>
-      <ButtonContainer>
+            {data.createdAt !== data.updatedAt && (
+              <p>
+                Last Updated:{' '}
+                <Moment
+                  format="MMMM Do YYYY | LT"
+                  date={new Date(data.updatedAt)}
+                />
+              </p>
+            )}
+          </TitleContainer>
+          <TagContainer>
+            <Tag>{data.tags && data.tags[0]}</Tag>
+          </TagContainer>
+        </LinkContainer>
+      </SubContainerContent>
+
+      <SubContainerButtons>
         <StyledButton onClick={deleteButtonHandler}>Delete</StyledButton>
         <UpdateModalForm team={data} />
-      </ButtonContainer>
+      </SubContainerButtons>
     </Container>
   );
 };

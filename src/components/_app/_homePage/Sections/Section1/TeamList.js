@@ -4,9 +4,7 @@ import { TeamsContext } from '../../../../../context/teams-context';
 import { IoMdSad } from 'react-icons/io';
 import { TeamItem } from './TeamItem';
 
-const Container = styled.div`
-  padding: 2rem;
-`;
+const Container = styled.div``;
 
 const NoTeamsContainer = styled.div`
   font-size: 1.8rem;

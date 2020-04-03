@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 
 // styling
 import styled from '@emotion/styled';
+import { Menu, Dropdown } from 'antd';
 
 // aws
 import { API, graphqlOperation } from 'aws-amplify';
@@ -38,11 +39,16 @@ const Form = styled.form`
     }
   }
 `;
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Button = styled.button`
   outline: none;
   border: 2px solid black;
-  padding: 4px 8px;
+  padding: 0.4rem 0.5rem;
   border-radius: 4px;
   background: white;
   cursor: pointer;
@@ -65,43 +71,69 @@ export const Search = () => {
   // state
   const [searchTerm, setSearchTerm] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
+  const [sortField, setSortField] = useState('createdAt');
+  const [sortOrder, setSortOrder] = useState('desc');
+
+  // run graphQL operation
+  const runSearchOperation = async (field, direction) => {
+    if (searchTerm !== '') {
+      const result = await API.graphql(
+        graphqlOperation(searchTeams, {
+          filter: {
+            name: { matchPhrasePrefix: searchTerm },
+          },
+          sort: {
+            field,
+            direction,
+          },
+        }),
+      );
+      // update teams context
+      setTeams({ ...teams, items: result.data.searchTeams.items });
+
+      // update the state
+      setHasSearched(true);
+    } else {
+      const result = await API.graphql(
+        graphqlOperation(searchTeams, {
+          filter: {
+            name: { wildcard: '*' },
+          },
+          sort: {
+            field: sortField,
+            direction: sortOrder,
+          },
+        }),
+      );
+      // update teams context
+      setTeams({ ...teams, items: result.data.searchTeams.items });
+
+      // update the state
+      setHasSearched(false);
+    }
+  };
 
   // update teams based on search
-  const submitSearchHandler = async e => {
+  const submitSearchHandler = e => {
     e.preventDefault();
-    console.log('I was submitted', searchTerm);
-    const result = await API.graphql(
-      graphqlOperation(searchTeams, {
-        filter: {
-          name: { matchPhrasePrefix: searchTerm },
-        },
-        sort: {
-          field: 'createdAt',
-          direction: 'desc',
-        },
-      }),
-    );
-    // update teams context
-    setTeams({ ...teams, items: result.data.searchTeams.items });
-
-    // update the state
-    setHasSearched(true);
+    runSearchOperation(sortField, sortOrder);
   };
 
   // handle input
   const searchTermHandler = e => {
     setSearchTerm(e.target.value);
   };
+
   // clear search filters and inputs
-  const clearSearchHandler = async () => {
+  const clearSearchHandler = async (field, direction) => {
     const result = await API.graphql(
       graphqlOperation(searchTeams, {
         filter: {
           name: { wildcard: '*' },
         },
         sort: {
-          field: 'createdAt',
-          direction: 'desc',
+          field,
+          direction,
         },
       }),
     );
@@ -111,6 +143,39 @@ export const Search = () => {
     setSearchTerm('');
     setHasSearched(false);
   };
+
+  // sort order button handler
+  const sortOrderButtonHandler = () => {
+    if (sortOrder === 'desc') {
+      setSortOrder('asc');
+      runSearchOperation(sortField, 'asc');
+    } else {
+      setSortOrder('desc');
+      runSearchOperation(sortField, 'desc');
+    }
+  };
+
+  // sort field button handler
+  const sortFieldButtonHandler = e => {
+    console.log(e.key);
+    setSortField(e.key);
+    runSearchOperation(e.key, sortOrder);
+  };
+
+  // sort field menu options
+  const sortFieldMenu = (
+    <Menu>
+      <Menu.Item onClick={sortFieldButtonHandler} key="name">
+        Name
+      </Menu.Item>
+      <Menu.Item onClick={sortFieldButtonHandler} key="createdAt">
+        Created At
+      </Menu.Item>
+      <Menu.Item onClick={sortFieldButtonHandler} key="updatedAt">
+        Updated At
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <Container>
@@ -122,11 +187,31 @@ export const Search = () => {
           value={searchTerm}
           required
         />
+        <ButtonContainer>
+          {/* Submit Search  */}
+          <Button type="submit">Search</Button>
+          {/* Clear Search  */}
+          <Button
+            onClick={() => clearSearchHandler(sortField, sortOrder)}
+            type="button"
+          >
+            Clear
+          </Button>
+          {/* Order Search   */}
+          <Button onClick={sortOrderButtonHandler} type="button">
+            {sortOrder === 'desc' ? 'Sort Asc' : 'Sort Desc'}
+          </Button>
 
-        <Button type="submit">Search</Button>
-        <Button onClick={clearSearchHandler} type="button">
-          Clear
-        </Button>
+          {/* Choose Sort Field   */}
+          <Dropdown overlay={sortFieldMenu} trigger={['click']}>
+            <Button
+              className="ant-dropdown-link"
+              onClick={e => e.preventDefault()}
+            >
+              Sort By
+            </Button>
+          </Dropdown>
+        </ButtonContainer>
       </Form>
       {hasSearched && (
         <SearchSummary>

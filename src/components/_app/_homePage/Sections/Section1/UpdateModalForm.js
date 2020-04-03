@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 
 // styling
 import styled from '@emotion/styled';
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 
 // aws
 import { API, graphqlOperation } from 'aws-amplify';
@@ -14,15 +14,11 @@ import { onUpdateTeam } from '../../../../../graphql/subscriptions';
 // reusableStyles
 import { H3 } from '../../../../reusableStyles/typography/Typography';
 import { TeamsContext } from '../../../../../context/teams-context';
+import { StyledButton } from './Styled';
 
 const Container = styled.div``;
 
-const ModalButton = styled(Button)`
-  width: 10rem;
-  padding: 3px 6px;
-  font-size: 1.5rem;
-  border-radius: 4px;
-
+const ModalButton = styled(StyledButton)`
   &:hover {
     color: ${props => props.theme.colors.primary};
     border: 1px solid ${props => props.theme.colors.primary};

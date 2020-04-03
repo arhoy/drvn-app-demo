@@ -63,10 +63,12 @@ const TitleContainer = styled.div`
 `;
 
 const tagOptions = [
-  { value: 'book', label: 'Books' },
-  { value: 'clothes', label: 'Clothes' },
-  { value: 'online-courses', label: 'Online Courses' },
-  { value: 'electronics', label: 'Electronics' },
+  { id: 'accounting', value: 'Accounting', label: 'Accounting' },
+  { id: 'finance', value: 'Finance', label: 'Finance' },
+  { id: 'hr', value: 'Human Resources', label: 'Human Resources' },
+  { id: 'it', value: 'IT', label: 'IT' },
+  { id: 'marketing', value: 'Marketing', label: 'Marketing' },
+  { id: 'sales', value: 'Sales', label: 'Sales' },
 ];
 
 export const NewTeamForm = () => {
@@ -136,7 +138,7 @@ export const NewTeamForm = () => {
           required
         />
         <label htmlFor="tags">
-          Select Tag
+          Select Department
           <select
             onChange={event => setSelectTag(event.target.value)}
             value={selectedTag}
