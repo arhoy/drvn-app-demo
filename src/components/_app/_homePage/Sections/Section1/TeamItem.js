@@ -63,6 +63,10 @@ const TitleContainer = styled.div`
     font-weight: bold;
     font-size: 1.8rem;
   }
+  & p {
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 export const TeamItem = ({ data }) => {

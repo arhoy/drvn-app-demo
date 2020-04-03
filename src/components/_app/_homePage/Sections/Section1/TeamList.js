@@ -35,7 +35,7 @@ export const TeamList = () => {
         teams.items.map(item => <TeamItem key={item.id} data={item} />)
       ) : (
         <NoTeamsContainer>
-          <h3>You have No Teams</h3>
+          <h3>No Teams Found</h3>
           <StyledIcon />
           <p>Add one above to get started!</p>
         </NoTeamsContainer>

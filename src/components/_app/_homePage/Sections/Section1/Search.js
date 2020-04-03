@@ -1,5 +1,14 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+
+// styling
 import styled from '@emotion/styled';
+
+// aws
+import { API, graphqlOperation } from 'aws-amplify';
+
+// context
+import { TeamsContext } from '../../../../../context/teams-context';
+import { searchTeams } from '../../../../../graphql/queries';
 
 const Container = styled.div`
   max-width: ${props => props.theme.screenSize.mobileL};
@@ -43,12 +52,66 @@ const Button = styled.button`
   }
 `;
 
-export const Search = ({
-  searchTerm,
-  searchTermHandler,
-  submitSearchHandler,
-  clearSearchHandler,
-}) => {
+const SearchSummary = styled.div`
+  & span {
+    font-weight: bold;
+  }
+`;
+
+export const Search = () => {
+  // context
+  const [teams, setTeams] = useContext(TeamsContext);
+
+  // state
+  const [searchTerm, setSearchTerm] = useState('');
+  const [hasSearched, setHasSearched] = useState(false);
+
+  // update teams based on search
+  const submitSearchHandler = async e => {
+    e.preventDefault();
+    console.log('I was submitted', searchTerm);
+    const result = await API.graphql(
+      graphqlOperation(searchTeams, {
+        filter: {
+          name: { matchPhrasePrefix: searchTerm },
+        },
+        sort: {
+          field: 'createdAt',
+          direction: 'desc',
+        },
+      }),
+    );
+    // update teams context
+    setTeams({ ...teams, items: result.data.searchTeams.items });
+
+    // update the state
+    setHasSearched(true);
+  };
+
+  // handle input
+  const searchTermHandler = e => {
+    setSearchTerm(e.target.value);
+  };
+  // clear search filters and inputs
+  const clearSearchHandler = async () => {
+    const result = await API.graphql(
+      graphqlOperation(searchTeams, {
+        filter: {
+          name: { wildcard: '*' },
+        },
+        sort: {
+          field: 'createdAt',
+          direction: 'desc',
+        },
+      }),
+    );
+    // update context
+    setTeams({ ...teams, items: result.data.searchTeams.items });
+    // update state
+    setSearchTerm('');
+    setHasSearched(false);
+  };
+
   return (
     <Container>
       <Form onSubmit={submitSearchHandler}>
@@ -65,6 +128,12 @@ export const Search = ({
           Clear
         </Button>
       </Form>
+      {hasSearched && (
+        <SearchSummary>
+          {teams.items.length} Search Result{teams.items.length !== 1 && 's'}{' '}
+          for <span>{searchTerm}</span>
+        </SearchSummary>
+      )}
     </Container>
   );
 };

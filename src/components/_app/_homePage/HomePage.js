@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 // aws
 import { API, graphqlOperation } from 'aws-amplify';
-import { listTeams } from '.././../../graphql/queries';
+import { searchTeams } from '.././../../graphql/queries';
 
 // layout
 import { DashboardLayout } from '../layouts/DashboardLayout';
@@ -17,10 +17,24 @@ export const HomePage = () => {
   const [teams, setTeams] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // get the list of all created teams
+  /**
+   * get the list of all created teams
+   * using searchTeams to order by created date
+   **/
+
   const handleGetTeams = async () => {
-    const result = await API.graphql(graphqlOperation(listTeams));
-    setTeams(result.data.listTeams);
+    const result = await API.graphql(
+      graphqlOperation(searchTeams, {
+        filter: {
+          name: { wildcard: '*' },
+        },
+        sort: {
+          field: 'createdAt',
+          direction: 'desc',
+        },
+      }),
+    );
+    setTeams(result.data.searchTeams);
     setIsLoading(false);
   };
   useEffect(() => {
