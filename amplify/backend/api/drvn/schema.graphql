@@ -11,7 +11,11 @@ type Team @model @searchable {
 type User
   @model
   @searchable
-  @auth(rules: [{ allow: groups, groups: ["admin"] }]) {
+  @auth(
+    rules: [
+      { allow: groups, groups: ["admin"], operations: [create, update, delete] }
+    ]
+  ) {
   id: ID!
   username: String!
   email: String!

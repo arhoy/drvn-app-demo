@@ -39,14 +39,16 @@ const StyledLink = styled(Link)`
 
 export const DashboardLayout = ({ children }) => {
   const user = useContext(UserContext);
-
-  const { username } = user;
+  const role_type = user['custom:role_type'];
 
   return (
     <>
       <Header>
         <p>
-          Hello <span>{username}</span>! This is your Dashboard
+          Hello <span>{user.username}</span>! This is your Dashboard
+        </p>
+        <p>
+          Your current role is <span>{role_type}</span>
         </p>
         <NavLinksContainer>
           <StyledLink to="/app/home">Home</StyledLink>

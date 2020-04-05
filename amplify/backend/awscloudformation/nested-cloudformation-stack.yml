@@ -131,7 +131,7 @@
 						]
 					},
 					"S3DeploymentBucket": "amplify-drvn-app-demo-drvn-24901-deployment",
-					"S3DeploymentRootKey": "amplify-appsync-files/aee12dc96b2d1a57c9f1d55e7e154a949a320368",
+					"S3DeploymentRootKey": "amplify-appsync-files/77e3e297cadb47f4712b7b048e73ca94993a89cb",
 					"env": "drvn"
 				}
 			}

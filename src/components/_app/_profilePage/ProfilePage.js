@@ -6,6 +6,7 @@ import { Section } from '../../reusableStyles/sections/Sections';
 
 export const ProfilePage = () => {
   const user = getCurrentUser();
+  console.log(user);
   return (
     <DashboardLayout>
       <Section>

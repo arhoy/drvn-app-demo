@@ -24,7 +24,10 @@ import { UpdateModalForm } from './UpdateModalForm';
 // context
 import { TeamsContext } from '../../../../../context/teams-context';
 import { UserContext } from '../../../../../context/user-context';
+
+// custom styling
 import { StyledButton } from './Styled';
+import { openNotification } from '../../../../../utils/notification/openNotification';
 
 const Container = styled.div`
   color: ${props => props.theme.colors.black};
@@ -77,7 +80,7 @@ export const TeamItem = ({ data }) => {
   const [teams, setTeams] = useContext(TeamsContext);
 
   const user = useContext(UserContext);
-  console.log('user is', user);
+  const role_type = user['custom:role_type'];
 
   useEffect(() => {
     const deleteProductListener = API.graphql(
@@ -100,8 +103,12 @@ export const TeamItem = ({ data }) => {
       deleteProductListener.unsubscribe();
     };
     // pass in teams to ensure it listens for change in teams array
-  }, [teams]);
+  }, [teams, setTeams]);
   const deleteButtonHandler = async () => {
+    if (role_type !== 'admin') {
+      openNotification('Attention', 'Only administrators can delete teams', 3);
+      return;
+    }
     try {
       const input = {
         id: data.id,

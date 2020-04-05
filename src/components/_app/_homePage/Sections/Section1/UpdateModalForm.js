@@ -14,7 +14,9 @@ import { onUpdateTeam } from '../../../../../graphql/subscriptions';
 // reusableStyles
 import { H3 } from '../../../../reusableStyles/typography/Typography';
 import { TeamsContext } from '../../../../../context/teams-context';
+import { UserContext } from '../../../../../context/user-context';
 import { StyledButton } from './Styled';
+import { openNotification } from '../../../../../utils/notification/openNotification';
 
 const Container = styled.div``;
 
@@ -105,7 +107,10 @@ export const UpdateModalForm = ({ team }) => {
     return () => {
       updateTeamListener.unsubscribe();
     };
-  }, []);
+  }, [setTeams, teams]);
+
+  // context
+  const user = useContext(UserContext);
 
   // state
   const [visible, setVisible] = useState(false);
@@ -116,6 +121,10 @@ export const UpdateModalForm = ({ team }) => {
   const [name, setName] = useState(team.name);
 
   const showModal = () => {
+    if (user.role_type !== 'admin') {
+      openNotification('Attention', 'Only administrators can update this', 3);
+      return;
+    }
     setVisible(true);
   };
   const handleOk = () => {

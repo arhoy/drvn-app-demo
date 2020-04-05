@@ -99,9 +99,26 @@ class SignUp extends React.Component {
     } = this.state;
 
     // front end validation
+    if (username.length < 3) {
+      this.setState({
+        frontEndError: 'Username must be at least 3 characeters',
+      });
+      return;
+    }
+    if (password.length < 6) {
+      this.setState({ frontEndError: 'Please enter a strong password' });
+      return;
+    }
+    if (!email) {
+      this.setState({ frontEndError: 'Please enter a email' });
+      return;
+    }
     if (phone_number.length !== 10) {
       this.setState({ frontEndError: 'Phone Number Not Valid' });
-      console.log('invalid phne number ', this.state.frontEndError);
+      return;
+    }
+    if (role_type === '') {
+      this.setState({ frontEndError: 'Please select a role' });
       return;
     }
 
@@ -137,7 +154,6 @@ class SignUp extends React.Component {
   };
 
   render() {
-    console.log('errir', this.state.role_type);
     return (
       <Container>
         <TitleContainer>
@@ -212,6 +228,7 @@ class SignUp extends React.Component {
                 <select
                   name="role_type"
                   onChange={this.handleUpdate}
+                  onBlur={this.handleUpdate}
                   value={this.state.role_type}
                 >
                   <option key="0" className="disabled" value="">
