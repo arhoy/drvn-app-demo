@@ -20,9 +20,12 @@ const Button = styled.button`
 
 export const Signout = () => {
   const signoutHandler = async () => {
-    navigate('/');
     try {
       await Auth.signOut();
+      navigate('/');
+      setTimeout(() => {
+        window.location.reload();
+      }, 600);
     } catch (error) {
       console.error('Not Able to sign user out', error);
     }

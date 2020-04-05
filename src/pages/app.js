@@ -16,9 +16,6 @@ import SignUp from '../components/_app/_auth/_signup/SignUp';
 import { ProfilePage } from '../components/_app/_profilePage/ProfilePage';
 import { HomePage } from '../components/_app/_homePage/HomePage';
 
-// template componentes
-import { MarketPage } from '../components/_app/templates/_marketpage/MarketPage';
-
 // Utils
 
 import PrivateRoute from '../components/_app/PrivateRoute';
@@ -32,11 +29,10 @@ Amplify.configure(config);
 const App = () => (
   <Layout>
     <Router>
-      <PrivateRoute path="/app/" component={HomePage} />
+      <PrivateRoute path="/app/home" component={HomePage} />
       <PrivateRoute path="/app/profile" component={ProfilePage} />
       <Login path="/app/login" />
       <SignUp path="/app/signup" />
-      <MarketPage path="/app/markets/:marketplaceId" />
     </Router>
   </Layout>
 );

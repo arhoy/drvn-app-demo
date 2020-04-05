@@ -140,7 +140,7 @@ export const Navigation = () => {
             <AuthContainer>
               <div className="user">
                 Hello,{' '}
-                {username || <SigninLink to="/app"> Sign in </SigninLink>}
+                {username || <SigninLink to="/app/login"> Sign in </SigninLink>}
               </div>
               {username && (
                 <div className="logout">
@@ -154,7 +154,7 @@ export const Navigation = () => {
             <CustomLink className="underline" to="/about">
               About
             </CustomLink>
-            <CustomLink className="underline" to="/app">
+            <CustomLink className="underline" to="/app/home">
               Dashboard
             </CustomLink>
             <CustomLink className="underline" to="/blog">

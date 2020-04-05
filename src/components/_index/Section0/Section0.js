@@ -22,7 +22,7 @@ export const Section0 = () => {
       <Section>
         <H1>DEMO 4 DRVN</H1>
         <LinkContainer>
-          <Link to="/app"> View Your Dashboard</Link>
+          <Link to="/app/home"> View Your Dashboard</Link>
         </LinkContainer>
       </Section>
     </div>

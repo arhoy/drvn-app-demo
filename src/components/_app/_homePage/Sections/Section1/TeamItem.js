@@ -77,7 +77,7 @@ export const TeamItem = ({ data }) => {
   const [teams, setTeams] = useContext(TeamsContext);
 
   const user = useContext(UserContext);
-  const owner = user.sub;
+  console.log('user is', user);
 
   useEffect(() => {
     const deleteProductListener = API.graphql(
@@ -115,7 +115,7 @@ export const TeamItem = ({ data }) => {
   return (
     <Container>
       <SubContainerContent>
-        <LinkContainer to={`/app/markets/${data.id}`}>
+        <LinkContainer to={`/app/teams/${data.id}`}>
           <TitleContainer>
             <h4>{data.name}</h4>
             <h5>Created By: {data.owner}</h5>
