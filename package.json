@@ -29,7 +29,7 @@
     "gatsby-transformer-sharp": "^2.2.5",
     "graphql": "^14.1.1",
     "gsap": "^3.2.6",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.28",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
